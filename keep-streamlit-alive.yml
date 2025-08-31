@@ -1,16 +1,27 @@
 name: Keep Streamlit Alive
 
+# Triggers: schedule every 5 minutes + manual trigger
 on:
   schedule:
-    # Runs every 5 minutes
-    - cron: '*/5 * * * *'
-  workflow_dispatch:  # Allows manual trigger from GitHub UI
+    - cron: '*/5 * * * *'  # every 5 minutes
+  workflow_dispatch:        # allows manual trigger
 
 jobs:
   ping_streamlit:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Ping Streamlit App
+      - name: Ping Main Streamlit App
         run: |
-          curl -X GET https://your-username-your-app-name.streamlit.app
+          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" https://ecorouteai-czqtu2dtwxkqedsadlxhcm.streamlit.app/)
+          echo "Main page response code: $RESPONSE"
+
+      - name: Ping User App Page
+        run: |
+          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" https://ecorouteai-czqtu2dtwxkqedsadlxhcm.streamlit.app/User.App)
+          echo "User App page response code: $RESPONSE"
+
+      - name: Ping City Planner Page
+        run: |
+          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" https://ecorouteai-czqtu2dtwxkqedsadlxhcm.streamlit.app/City_Planner)
+          echo "City Planner page response code: $RESPONSE"
