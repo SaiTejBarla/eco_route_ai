@@ -1,0 +1,8 @@
+streamlit
+requests
+sqlalchemy
+psycopg2-binary
+geopy
+langchain
+openai
+huggingface_hub
