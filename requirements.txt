@@ -6,3 +6,7 @@ geopy
 langchain
 openai
 huggingface_hub
+folium
+streamlit-folium
+pandas
+numpy
